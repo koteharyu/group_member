@@ -18,7 +18,7 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(member_params)
     if @member.save
-      redirect_to @member, notice: 'Member was successfully created.'
+      redirect_to @member, notice: "#{@member.name} さんを作成しました"
     else
       render :new
     end
@@ -26,7 +26,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      redirect_to @member, notice: 'Member was successfully updated.'
+      redirect_to @member, notice: "#{@member.name} さんに更新しました"
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class MembersController < ApplicationController
 
   def destroy
     @member.destroy
-    redirect_to members_url, notice: 'Member was successfully destroyed.'
+    redirect_to members_url, notice: "#{@member.name} さんを削除しました"
   end
 
   private
