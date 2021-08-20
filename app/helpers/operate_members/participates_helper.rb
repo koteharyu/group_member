@@ -1,0 +1,2 @@
+module OperateMembers::ParticipatesHelper
+end
