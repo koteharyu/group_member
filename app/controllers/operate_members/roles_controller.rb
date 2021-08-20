@@ -18,7 +18,8 @@ class OperateMembers::RolesController < ApplicationController
       selected_member&.update(role: 1)
       current_organizer&.update(role: 0)
     end
-    redirect_to group_path(@group), notice: 'Succeeded in setting the Organizer'
+    selected_member = Member.find(selected_member.member_id)
+    redirect_to group_path(@group), notice: "幹事は #{selected_member.name}さん に決まりました"
   end
 
   private
