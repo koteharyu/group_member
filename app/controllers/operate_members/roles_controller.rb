@@ -2,7 +2,7 @@ class OperateMembers::RolesController < ApplicationController
   before_action :set_group
 
   def update
-    if @group.members.blank?
+    if @group.members.blank? || @group.members.length < 2
       redirect_to group_path(@group), notice: 'メンバーを追加してください'
       return
     end
