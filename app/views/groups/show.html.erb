@@ -19,7 +19,7 @@
       <tr>
         <td><%= member.name%></td>
         <td><%= member.group_members.find_by(group_id: @group.id, member_id: member.id).role %></td>
-        <td><%= link_to "脱退", "#" %></td>
+        <td><%= link_to "脱退", operate_members_participate_path(@group, { params: { member_id: member.id } }), method: :delete, data: { confirm: "本当に脱退させますか？" } %></td>
       </tr>
     <% end %>
   </tbody>
