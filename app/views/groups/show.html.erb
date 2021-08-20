@@ -1,9 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+<%= link_to "groups", groups_path %>
+<%= link_to "members", members_path %>
+
+<h1><%= @group.name%>のメンバー一覧</h1>
+<h2>グループに参加中のメンバー</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @party.members.each do |member| %>
+      <tr>
+        <td><%= member.name%></td>
+        <td><%= member.group_members.find_by(group_id: @party.id, member_id: member.id).role %></td>
+        <td><%= link_to "脱退", "#" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "幹事を設定する", "#"%>
+
+<br>
+
+<h2>グループに未参加のメンバー</h2>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
