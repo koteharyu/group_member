@@ -10,6 +10,13 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    members = Member.all
+    @not_participated_members = []
+    members.each do |member|
+      if !member.group_ids.include?(@group.id)
+        @not_participated_members << member
+      end
+    end
   end
 
   # GET /groups/new

@@ -15,10 +15,10 @@
   </thead>
 
   <tbody>
-    <% @party.members.each do |member| %>
+    <% @group.members.each do |member| %>
       <tr>
         <td><%= member.name%></td>
-        <td><%= member.group_members.find_by(group_id: @party.id, member_id: member.id).role %></td>
+        <td><%= member.group_members.find_by(group_id: @group.id, member_id: member.id).role %></td>
         <td><%= link_to "脱退", "#" %></td>
       </tr>
     <% end %>
@@ -30,6 +30,22 @@
 <br>
 
 <h2>グループに未参加のメンバー</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @not_participated_members.each do |member| %>
+      <tr>
+        <td><%= member.name%></td>
+        <td><%= link_to "参加", operate_members_participate_path(@group, { params: { member_id: member.id } }), method: :put %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
