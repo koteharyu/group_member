@@ -11,12 +11,12 @@ class OperateMembers::RolesController < ApplicationController
     if current_organizer.nil?
       target_members = @group.group_members.all
       selected_member = target_members.sample
-      selected_member&.update(role: 1)
+      selected_member&.organizer!
     else
       target_members = @group.group_members.filter{ |m| m.id != current_organizer.id  }
       selected_member = target_members.sample
-      selected_member&.update(role: 1)
-      current_organizer&.update(role: 0)
+      selected_member&.organizer!
+      current_organizer&.regular!
     end
     selected_member = Member.find(selected_member.member_id)
     redirect_to group_path(@group), notice: "幹事は #{selected_member.name}さん に決まりました"
