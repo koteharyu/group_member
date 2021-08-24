@@ -13,7 +13,7 @@ class OperateMembers::RolesController < ApplicationController
       selected_member = target_members.sample
       selected_member&.organizer!
     else
-      target_members = @group.group_members.filter{ |m| m.id != current_organizer.id  }
+      target_members = @group.group_members.reject{ |m| m.id == current_organizer.id  }
       selected_member = target_members.sample
       selected_member&.organizer!
       current_organizer&.regular!

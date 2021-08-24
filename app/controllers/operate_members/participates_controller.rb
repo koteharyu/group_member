@@ -10,7 +10,7 @@ class OperateMembers::ParticipatesController < ApplicationController
 
   def destroy
     new_member_ids = []
-    new_member_ids = @group.member_ids.filter{ |member| member != params[:member_id].to_i }
+    new_member_ids = @group.member_ids.reject{ |member| member == params[:member_id].to_i }
     @group.member_ids = new_member_ids
     redirect_to group_path(@group)
   end
